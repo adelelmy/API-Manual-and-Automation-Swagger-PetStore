@@ -1,0 +1,2411 @@
+{
+	"info": {
+		"_postman_id": "5323ebbc-7b76-4e7c-b0a9-9d40562669cf",
+		"name": "petstore.swagger",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38018313"
+	},
+	"item": [
+		{
+			"name": "pet (Valid)",
+			"item": [
+				{
+					"name": "add new pet",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status checked\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 2000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response Size is less than 1000 bytes\", function () {\r",
+									"    pm.expect(pm.response.responseSize).to.be.below(1000);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": 10,\n  \"category\": {\n    \"id\": 0,\n    \"name\": \"string\"\n  },\n  \"name\": \"doggie\",\n  \"photoUrls\": [\n    \"string\"\n  ],\n  \"tags\": [\n    {\n      \"id\": 20,\n      \"name\": \"string\"\n    }\n  ],\n  \"status\": \"available\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/pet",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"pet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update existing pet",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData =  pm.response.json();\r",
+									"var pettoken = jsonData.id;\r",
+									"pm.environment.set(\"pet_id\", pettoken);\r",
+									"\r",
+									"pm.test(\"Status checked\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 2000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response Size is less than 1000 bytes\", function () {\r",
+									"    pm.expect(pm.response.responseSize).to.be.below(1000);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": 10,\n  \"category\": {\n    \"id\": 0,\n    \"name\": \"string\"\n  },\n  \"name\": \"doggie\",\n  \"photoUrls\": [\n    \"string\"\n  ],\n  \"tags\": [\n    {\n      \"id\": 20,\n      \"name\": \"string\"\n    }\n  ],\n  \"status\": \"available\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/pet",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"pet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find by status",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status checked\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 2000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response Size is less than 200 KB\", function () {\r",
+									"    pm.expect(pm.response.responseSize).to.be.below(200000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"check if the response contains id\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData[0]).to.have.property(\"id\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/pet/findByStatus?status=available",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"pet",
+								"findByStatus"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "available"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status checked\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 2000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response Size is less than 200 KB\", function () {\r",
+									"    pm.expect(pm.response.responseSize).to.be.below(200000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"check if the response contains id\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property(\"id\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/pet/{{pet_id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"pet",
+								"{{pet_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update pet with form data(name or status)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status checked\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 2000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response Size is less than 200 KB\", function () {\r",
+									"    pm.expect(pm.response.responseSize).to.be.below(200000);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "kangs name",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/pet/{{pet_id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"pet",
+								"{{pet_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete pet",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status checked\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 2000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response Size is less than 200 KB\", function () {\r",
+									"    pm.expect(pm.response.responseSize).to.be.below(200000);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/pet/{{pet_id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"pet",
+								"{{pet_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Update non-existing pet",
+			"item": [
+				{
+					"name": "find by status",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData =  pm.response.json();\r",
+									"var pettoken = jsonData[0].id;\r",
+									"pm.environment.set(\"pet_id\", pettoken);\r",
+									"\r",
+									"pm.test(\"Status checked\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 2000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(20000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response Size is less than 200 KB\", function () {\r",
+									"    pm.expect(pm.response.responseSize).to.be.below(200000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"check if the response contains id\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData[0]).to.have.property(\"id\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/pet/findByStatus?status=available",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"pet",
+								"findByStatus"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "available"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update existing pet",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status checked\", function () {\r",
+									"    pm.response.to.have.status(\"Not Found\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 2000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response Size is less than 1000 bytes\", function () {\r",
+									"    pm.expect(pm.response.responseSize).to.be.below(1000);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": 10000,\n  \"category\": {\n    \"id\": 0,\n    \"name\": \"string\"\n  },\n  \"name\": \"\",\n  \"photoUrls\": [\n    \"string\"\n  ],\n  \"tags\": [\n    {\n     \n    }\n  ],\n  \"status\": \"available\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/pet",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"pet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status checked\", function () {\r",
+									"    pm.response.to.have.status(\"Not Found\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 2000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response Size is less than 200 KB\", function () {\r",
+									"    pm.expect(pm.response.responseSize).to.be.below(200000);\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/pet/{{pet_id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"pet",
+								"{{pet_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update pet with form data(name or status)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status checked\", function () {\r",
+									"    pm.response.to.have.status(\"Not Found\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 2000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response Size is less than 200 KB\", function () {\r",
+									"    pm.expect(pm.response.responseSize).to.be.below(200000);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "kangs name",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/pet/{{pet_id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"pet",
+								"{{pet_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete pet",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status checked\", function () {\r",
+									"    pm.response.to.have.status(\"Not Found\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 2000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response Size is less than 200 KB\", function () {\r",
+									"    pm.expect(pm.response.responseSize).to.be.below(200000);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/pet/{{pet_id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"pet",
+								"{{pet_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Delete non-existing pet",
+			"item": [
+				{
+					"name": "delete pet",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status checked\", function () {\r",
+									"    pm.response.to.have.status(\"Method Not Allowed\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 405\", function () {\r",
+									"    pm.response.to.have.status(405);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 2000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response Size is less than 200 KB\", function () {\r",
+									"    pm.expect(pm.response.responseSize).to.be.below(200000);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/pet",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"pet"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "store (Valid)",
+			"item": [
+				{
+					"name": "return pet inventories",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status checked\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 2000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response Size is less than 200 KB\", function () {\r",
+									"    pm.expect(pm.response.responseSize).to.be.below(200000);\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/store/inventory",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"store",
+								"inventory"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "place an order for a pet",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"var storetoken = jsonData.id;\r",
+									"console.log(storetoken);\r",
+									"pm.environment.set(\"store_id\", storetoken);\r",
+									"\r",
+									"pm.test(\"Status checked\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 2000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response Size is less than 200 KB\", function () {\r",
+									"    pm.expect(pm.response.responseSize).to.be.below(200000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"check if the response contains id\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property(\"id\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": 10,\n  \"petId\": 50,\n  \"quantity\": 0,\n  \"shipDate\": \"2025-11-20T12:09:15.110Z\",\n  \"status\": \"placed\",\n  \"complete\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/store/order",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"store",
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find purchase order by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status checked\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 2000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response Size is less than 200 KB\", function () {\r",
+									"    pm.expect(pm.response.responseSize).to.be.below(200000);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/store/order/{{store_id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"store",
+								"order",
+								"{{store_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete purchase order by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status checked\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 2000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response Size is less than 200 KB\", function () {\r",
+									"    pm.expect(pm.response.responseSize).to.be.below(200000);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/store/order/{{store_id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"store",
+								"order",
+								"{{store_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find purchase order by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status checked\", function () {\r",
+									"    pm.response.to.have.status(\"Not Found\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 2000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response Size is less than 200 KB\", function () {\r",
+									"    pm.expect(pm.response.responseSize).to.be.below(200000);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/store/order/{{store_id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"store",
+								"order",
+								"{{store_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "store without token(Invalid)",
+			"item": [
+				{
+					"name": "return pet inventories",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status checked\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 2000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response Size is less than 200 KB\", function () {\r",
+									"    pm.expect(pm.response.responseSize).to.be.below(200000);\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/store/inventory",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"store",
+								"inventory"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "place an order for a pet",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"var storetoken = jsonData.id;\r",
+									"pm.environment.set(\"store_id\", storetoken);\r",
+									"\r",
+									"pm.test(\"Status checked\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 2000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response Size is less than 200 KB\", function () {\r",
+									"    pm.expect(pm.response.responseSize).to.be.below(200000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"check if the response contains id\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property(\"id\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": 0,\n  \"petId\": 0,\n  \"quantity\": 0,\n  \"shipDate\": \"2025-11-20T12:09:15.110Z\",\n  \"status\": \"placed\",\n  \"complete\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/store/order",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"store",
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find purchase order by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status checked\", function () {\r",
+									"    pm.response.to.have.status(\"Method Not Allowed\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 405\", function () {\r",
+									"    pm.response.to.have.status(405);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 2000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response Size is less than 200 KB\", function () {\r",
+									"    pm.expect(pm.response.responseSize).to.be.below(200000);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/store/order",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"store",
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete purchase order by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status checked\", function () {\r",
+									"    pm.response.to.have.status(\"Method Not Allowed\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 405\", function () {\r",
+									"    pm.response.to.have.status(405);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 2000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response Size is less than 200 KB\", function () {\r",
+									"    pm.expect(pm.response.responseSize).to.be.below(200000);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/store/order",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"store",
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find purchase order by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status checked\", function () {\r",
+									"    pm.response.to.have.status(\"Method Not Allowed\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 405\", function () {\r",
+									"    pm.response.to.have.status(405);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 2000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response Size is less than 200 KB\", function () {\r",
+									"    pm.expect(pm.response.responseSize).to.be.below(200000);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/store/order",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"store",
+								"order"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user (Valid)",
+			"item": [
+				{
+					"name": "create list of users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status checked\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 2000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response Size is less than 200 KB\", function () {\r",
+									"    pm.expect(pm.response.responseSize).to.be.below(200000);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n  {\n    \"id\": 10,\n    \"username\": \"Adel\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"email\": \"string\",\n    \"password\": \"string\",\n    \"phone\": \"string\",\n    \"userStatus\": 0\n  }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/user/createWithList",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"createWithList"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get user by user name",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData =  pm.response.json();\r",
+									"var usernametoken = jsonData.username;\r",
+									"pm.environment.set(\"username\", usernametoken);\r",
+									"\r",
+									"var json_Data =  pm.response.json();\r",
+									"var passwordtoken = json_Data.password;\r",
+									"pm.environment.set(\"password\", passwordtoken);\r",
+									"\r",
+									"pm.test(\"Status checked\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 2000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response Size is less than 200 KB\", function () {\r",
+									"    pm.expect(pm.response.responseSize).to.be.below(200000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"check if the response contains id\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property(\"username\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/user/Adel",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"Adel"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updated user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status checked\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 2000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response Size is less than 200 KB\", function () {\r",
+									"    pm.expect(pm.response.responseSize).to.be.below(200000);\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": 0,\n  \"username\": \"Adel\",\n  \"firstName\": \"string\",\n  \"lastName\": \"string\",\n  \"email\": \"string\",\n  \"password\": \"string\",\n  \"phone\": \"string\",\n  \"userStatus\": 0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/user/{{username}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"{{username}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status checked\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 2000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response Size is less than 200 KB\", function () {\r",
+									"    pm.expect(pm.response.responseSize).to.be.below(200000);\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "accept",
+								"value": ""
+							}
+						],
+						"url": {
+							"raw": "{{url}}/user/{{username}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"{{username}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logs user into the system",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status checked\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 2000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response Size is less than 200 KB\", function () {\r",
+									"    pm.expect(pm.response.responseSize).to.be.below(200000);\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/user/login?{{username}}&{{password}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"login"
+							],
+							"query": [
+								{
+									"key": "{{username}}",
+									"value": null
+								},
+								{
+									"key": "{{password}}",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logs out current logged in user session",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status checked\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 2000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response Size is less than 200 KB\", function () {\r",
+									"    pm.expect(pm.response.responseSize).to.be.below(200000);\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/user/logout",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user without token(Invalid)",
+			"item": [
+				{
+					"name": "create list of users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status checked\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 2000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response Size is less than 200 KB\", function () {\r",
+									"    pm.expect(pm.response.responseSize).to.be.below(200000);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n  {\n    \"id\": 10,\n    \"username\": \"Adel\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"email\": \"string\",\n    \"password\": \"string\",\n    \"phone\": \"string\",\n    \"userStatus\": 0\n  }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/user/createWithList",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"createWithList"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get user by user name",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData =  pm.response.json();\r",
+									"var usernametoken = jsonData.username;\r",
+									"pm.environment.set(\"username\", usernametoken);\r",
+									"\r",
+									"var json_Data =  pm.response.json();\r",
+									"var passwordtoken = json_Data.password;\r",
+									"pm.environment.set(\"password\", passwordtoken);\r",
+									"\r",
+									"pm.test(\"Status checked\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 2000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response Size is less than 200 KB\", function () {\r",
+									"    pm.expect(pm.response.responseSize).to.be.below(200000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"check if the response contains id\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property(\"username\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/user/string",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"string"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updated user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status checked\", function () {\r",
+									"    pm.response.to.have.status(\"Method Not Allowed\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 405\", function () {\r",
+									"    pm.response.to.have.status(405);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 2000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response Size is less than 200 KB\", function () {\r",
+									"    pm.expect(pm.response.responseSize).to.be.below(200000);\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": 10,\n  \"username\": \"Adel\",\n  \"firstName\": \"string\",\n  \"lastName\": \"string\",\n  \"email\": \"string\",\n  \"password\": \"string\",\n  \"phone\": \"string\",\n  \"userStatus\": 0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/user/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status checked\", function () {\r",
+									"    pm.response.to.have.status(\"Method Not Allowed\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 405\", function () {\r",
+									"    pm.response.to.have.status(405);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 2000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response Size is less than 200 KB\", function () {\r",
+									"    pm.expect(pm.response.responseSize).to.be.below(200000);\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "accept",
+								"value": ""
+							}
+						],
+						"url": {
+							"raw": "{{url}}/user",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logs user into the system",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status checked\", function () {\r",
+									"    pm.response.to.have.status(\"Method Not Allowed\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 405\", function () {\r",
+									"    pm.response.to.have.status(405);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 2000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response Size is less than 200 KB\", function () {\r",
+									"    pm.expect(pm.response.responseSize).to.be.below(200000);\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/user/login?",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"login"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logs out current logged in user session",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status checked\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 2000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response Size is less than 200 KB\", function () {\r",
+									"    pm.expect(pm.response.responseSize).to.be.below(200000);\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/user/logout",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user with Data is incomplete(Invalid)",
+			"item": [
+				{
+					"name": "create list of users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status checked\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 2000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response Size is less than 200 KB\", function () {\r",
+									"    pm.expect(pm.response.responseSize).to.be.below(200000);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n  {\n    \"id\": 10,\n    \"username\": \"string\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"email\": \"string\",\n    \"password\": \"string\",\n    \"phone\": \"string\",\n    \"userStatus\": 0\n  }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/user/createWithList",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"createWithList"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get user by user name",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData =  pm.response.json();\r",
+									"var usernametoken = jsonData.username;\r",
+									"pm.environment.set(\"username\", usernametoken);\r",
+									"\r",
+									"var json_Data =  pm.response.json();\r",
+									"var passwordtoken = json_Data.password;\r",
+									"pm.environment.set(\"password\", passwordtoken);\r",
+									"\r",
+									"pm.test(\"Status checked\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 2000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response Size is less than 200 KB\", function () {\r",
+									"    pm.expect(pm.response.responseSize).to.be.below(200000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"check if the response contains id\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property(\"username\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/user/string",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"string"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updated user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status checked\", function () {\r",
+									"    pm.response.to.have.status(\"Not Found\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 2000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response Size is less than 200 KB\", function () {\r",
+									"    pm.expect(pm.response.responseSize).to.be.below(200000);\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \n  \"username\": \"string\",\n  \"firstName\": \"string\",\n  \"lastName\": \"string\",\n  \"email\": \"string\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/user/{{username}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"{{username}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status checked\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 2000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response Size is less than 200 KB\", function () {\r",
+									"    pm.expect(pm.response.responseSize).to.be.below(200000);\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "accept",
+								"value": ""
+							}
+						],
+						"url": {
+							"raw": "{{url}}/user/{{username}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"{{username}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logs user into the system",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status checked\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 2000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response Size is less than 200 KB\", function () {\r",
+									"    pm.expect(pm.response.responseSize).to.be.below(200000);\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/user/login?{{username}}&{{password}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"login"
+							],
+							"query": [
+								{
+									"key": "{{username}}",
+									"value": null
+								},
+								{
+									"key": "{{password}}",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logs out current logged in user session",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status checked\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 2000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response Size is less than 200 KB\", function () {\r",
+									"    pm.expect(pm.response.responseSize).to.be.below(200000);\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/user/logout",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
